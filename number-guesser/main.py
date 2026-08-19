@@ -1,7 +1,7 @@
 import random
 
 def random_number_generator() -> int:
-    return random.randrange(100) 
+    return random.randrange(101) 
 
 
 def compare_numbers(x: int, y: int) -> bool:
@@ -34,7 +34,7 @@ def main(random_number: int, count: int):
 
         if res == True:
             print(f'Congratulations!🥳 Took you a total of {count}')
-            
+
             if input('Fancy another game? (y/n) ') == 'y':
                 main(random_number_generator(), 0)
             else:
