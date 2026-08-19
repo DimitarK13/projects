@@ -1,48 +1,48 @@
 import random
 
-def random_number_generator() -> int:
+
+def generate_random_number() -> int:
     return random.randrange(101) 
 
 
-def compare_numbers(x: int, y: int) -> dict[bool, str]:
+def compare_numbers(x: int, y: int) -> str:
     if x == y:
-        return {True: 'Congratulations!🥳 Took you a total of'}
-
-    if x < y:
-        return{False: 'Your number is too small'}
-
-    if x > y:
-        return{False: 'Your number is too big'}
-
-    return {False: ''}
+        return 'Congratulations!🥳'
+    elif x < y:
+        return 'Your number is too small'
+    else:
+        return 'Your number is too big'
 
 
-def main(random_number: int, count: int):
-    count += 1
+def play_game():
+    count = 0
+    guess = -1
+    random_number = generate_random_number()
 
-    try:
-        user_input = int(input('Enter a number 0-100: '))
+    while guess != random_number:
+        try:
+            guess = int(input('Enter a number 0-100: '))
 
-        if user_input < 0 or user_input > 100:
-            print('Value must be between 0 and 100 ')
+            if guess < 0 or guess > 100:
+                print('Value must be between 0 and 100')
+                continue
 
-        result = compare_numbers(user_input, random_number)
+            count += 1
 
-        if next(iter(result)) == False:
-            print(next(iter(result.values())))
-            main(random_number, count)
+            result = compare_numbers(guess, random_number)
+
+            print(result)
+
+        except ValueError:
+            print('Well that\'s not a number now is it?')
+            
+    print(f'Took you a total of {count} guesses')
 
 
-        if next(iter(result)) == True:
-            print(f'{next(iter(result.values()))} {count} guesses')
+if __name__ == '__main__':
+    while True:
+        play_game()
 
-            if input('Fancy another game? (y/n) ') == 'y':
-                main(random_number_generator(), 0)
-            else:
-                print('Later gator')
-
-    except ValueError:
-        print('Well that\'s not a number now is it?')
-        main(random_number, count)
-
-main(random_number_generator(), 0)
+        if input('Fancy another game? (y/n) ') != 'y':
+            print('Later gator')
+            break
