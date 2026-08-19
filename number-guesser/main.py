@@ -43,6 +43,6 @@ def main(random_number: int, count: int):
 
     except ValueError:
         print('Well that\'s not a number now is it?')
-        main(random_number_generator(), 0)
+        main(random_number, count)
 
 main(random_number_generator(), 0)
