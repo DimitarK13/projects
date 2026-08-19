@@ -4,17 +4,17 @@ def random_number_generator() -> int:
     return random.randrange(101) 
 
 
-def compare_numbers(x: int, y: int) -> bool:
+def compare_numbers(x: int, y: int) -> dict[bool, str]:
     if x == y:
-        return True
+        return {True: 'Congratulations!🥳 Took you a total of'}
 
     if x < y:
-        print('Your number is too small')
+        return{False: 'Your number is too small'}
 
     if x > y:
-        print('Your number is too big')
+        return{False: 'Your number is too big'}
 
-    return False
+    return {False: ''}
 
 
 def main(random_number: int, count: int):
@@ -26,14 +26,15 @@ def main(random_number: int, count: int):
         if user_input < 0 or user_input > 100:
             print('Value must be between 0 and 100 ')
 
-        res = compare_numbers(user_input, random_number)
+        result = compare_numbers(user_input, random_number)
 
-        if res == False:
+        if next(iter(result)) == False:
+            print(next(iter(result.values())))
             main(random_number, count)
 
 
-        if res == True:
-            print(f'Congratulations!🥳 Took you a total of {count}')
+        if next(iter(result)) == True:
+            print(f'{next(iter(result.values()))} {count} guesses')
 
             if input('Fancy another game? (y/n) ') == 'y':
                 main(random_number_generator(), 0)
