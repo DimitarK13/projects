@@ -41,8 +41,6 @@ def handle_folder(path: str) -> None:
         print('No folder found')
 
 
-    
-
 if __name__ == '__main__':
     while True:
         user_input = input('Enter folder to organize (q to quit program): ')
