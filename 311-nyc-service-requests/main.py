@@ -39,3 +39,15 @@ print(grouped_by_problem)
 # 3. Noise - Street/Sidewalk    113564
 # 4. Blocked Driveway            80485
 # 5. UNSANITARY CONDITION        66874
+
+
+# Q: Which agencies receive the most requests?
+grouped_by_agency = df.groupby('Agency').size().sort_values(ascending=False)
+
+print(grouped_by_agency)
+# A:
+# 1. NYPD     794057
+# 2. HPD      274892
+# 3. DSNY     147244
+# 4. DOT      120404
+# 5. DEP      113016
