@@ -32,7 +32,7 @@ df.drop_duplicates(inplace=True)
 # Q: What types of problems generate the most requests?
 grouped_by_problem = df.groupby('Problem').size().sort_values(ascending=False)
 
-print(grouped_by_problem)
+# print(grouped_by_problem)
 # A: 
 # 1. Illegal Parking            272373
 # 2. Noise - Residential        166117
@@ -44,10 +44,22 @@ print(grouped_by_problem)
 # Q: Which agencies receive the most requests?
 grouped_by_agency = df.groupby('Agency').size().sort_values(ascending=False)
 
-print(grouped_by_agency)
+# print(grouped_by_agency)
 # A:
 # 1. NYPD     794057
 # 2. HPD      274892
 # 3. DSNY     147244
 # 4. DOT      120404
 # 5. DEP      113016
+
+
+# Q: How do requests vary by month
+df['Month'] = df['Created Date'].dt.month_name()
+grouped_by_month = df.groupby('Month').size().sort_values(ascending=False)
+
+# print(grouped_by_month)
+# A:
+# 1. July         343133
+# 2. June         334834
+# 3. August       328908
+# 4. September    323624
