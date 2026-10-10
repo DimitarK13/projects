@@ -63,3 +63,24 @@ grouped_by_month = df.groupby('Month').size().sort_values(ascending=False)
 # 2. June         334834
 # 3. August       328908
 # 4. September    323624
+
+
+# Q: Which complaint types take longest to resolve
+df['Time To Resolve'] = df['Closed Date'] - df['Created Date']
+df_time_to_resolve = df[['Problem', 'Time To Resolve', 'City']].sort_values(by='Time To Resolve', ascending=False)
+
+df_time_to_resolve.dropna(inplace=True)
+
+grouped_by_time_to_resolve = df_time_to_resolve.groupby('Problem')['Time To Resolve'].mean().sort_values(ascending=False)
+
+# print(df_time_to_resolve.head())
+# print(grouped_by_time_to_resolve)
+# A:
+# The longest it took to solve a single problem (Overgrown Tree/Branches) was 154 days, 21 hours and 39 seconds in Brooklyn
+# 
+# Complaint Types that took longest to solve on average:
+# 1. For Hire Vehicle Report    111 days 09:26:22.750000
+# 2. Calorie Labeling            60 days 00:16:20.333333
+# 3. Mobile Food Vendor          60 days 00:14:46.548996
+# 4. Tattooing                   60 days 00:14:17.611940
+# 5. Non-Residential Heat        59 days 17:53:58.533333
