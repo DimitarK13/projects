@@ -84,3 +84,23 @@ grouped_by_time_to_resolve = df_time_to_resolve.groupby('Problem')['Time To Reso
 # 3. Mobile Food Vendor          60 days 00:14:46.548996
 # 4. Tattooing                   60 days 00:14:17.611940
 # 5. Non-Residential Heat        59 days 17:53:58.533333
+
+
+# Q: How do patterns differ geographically
+grouped_by_location = df.groupby(['City', 'Problem']).size()
+
+top_3_cities = df['City'].value_counts().head(3).index
+
+# print(grouped_by_location.loc[top_3_cities].sort_values(ascending=False).head(10))
+# 1. BROOKLYN         507795
+# - Illegal Parking            98342
+# - Noise - Residential        52097
+# - Blocked Driveway           28580
+# 2. BRONX            313676
+# - Noise - Residential        40327
+# - Illegal Parking            38050
+# - Noise - Street/Sidewalk    36150
+# 3. NEW YORK         288406
+# - Illegal Parking            29973
+# - Noise - Street/Sidewalk    27561
+# - Noise - Residential        25433
