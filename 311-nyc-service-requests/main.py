@@ -26,5 +26,16 @@ df.dropna(subset=[
 
 df.drop_duplicates(inplace=True)
 
-print(df.info())
-print(df.nunique())
+
+# Analysis
+
+# Q: What types of problems generate the most requests?
+grouped_by_problem = df.groupby('Problem').size().sort_values(ascending=False)
+
+print(grouped_by_problem)
+# A: 
+# 1. Illegal Parking            272373
+# 2. Noise - Residential        166117
+# 3. Noise - Street/Sidewalk    113564
+# 4. Blocked Driveway            80485
+# 5. UNSANITARY CONDITION        66874
