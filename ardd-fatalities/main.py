@@ -80,5 +80,17 @@ df = df.convert_dtypes()
 # Q: How do incidents vary by time of day?
 grouped_by_time_of_day = df.groupby('Time of day').size()
 
-print(grouped_by_time_of_day)
-print(f'{np.around(grouped_by_time_of_day / len(df) * 100, 2)}')
+# print(grouped_by_time_of_day)
+# print(f'{np.around(grouped_by_time_of_day / len(df) * 100, 2)}')
+
+
+# Q: How do patterns differ between states
+grouped_by_state = df.groupby('State').size()
+grouped_by_state_and_time_of_day = df.groupby(['State', 'Time of day']).size()
+grouped_by_state_and_day_of_week = df.groupby(['State', 'Day of week']).size()
+
+print(grouped_by_state)
+print(np.around((grouped_by_state / len(df)) * 100, 2))
+
+print(grouped_by_state_and_time_of_day)
+print(grouped_by_state_and_day_of_week)
