@@ -3,7 +3,7 @@ import numpy as np
 
 pd.set_option('display.max_columns', None)
 
-df = pd.read_csv('ardd_fatalities.csv')
+df = pd.read_csv('ardd_fatalities.csv', low_memory=False)
 
 # Understanding the data
 # print(df.info())
@@ -68,3 +68,9 @@ df['Gender'] = df['Gender'].replace({'-9': 'Unspecified', 'M ': 'Unspecified'})
 df['Crash Type'] = df['Crash Type'].replace(pd.NA, 'Single')
 
 df.drop(df[df['Age Group'] == '-9'].index, inplace=True)
+
+# Convert types
+df['Christmas Period'] = df['Christmas Period'].replace({'No': False, 'Yes': True})
+df['Easter Period'] = df['Easter Period'].replace({'No': False, 'Yes': True})
+
+df = df.convert_dtypes()
