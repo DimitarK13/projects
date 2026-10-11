@@ -99,15 +99,29 @@ grouped_by_state_and_day_of_week = df.groupby(['State', 'Day of week']).size()
 # Q: How do incidents vary by gender
 grouped_by_gender = df.groupby('Gender').size()
 
-print(grouped_by_gender)
-print(np.around((grouped_by_gender / len(df)) * 100, 2))
+# print(grouped_by_gender)
+# print(np.around((grouped_by_gender / len(df)) * 100, 2))
 
 
 # Q: How do incidents vary by age group
 grouped_by_age_group = df.groupby('Age Group').size()
 
-print(grouped_by_age_group)
-print(np.around((grouped_by_age_group / len(df)) * 100, 2))
+# print(grouped_by_age_group)
+# print(np.around((grouped_by_age_group / len(df)) * 100, 2))
 
 grouped_by_age_group_and_crash_type = df.groupby(['Age Group', 'Crash Type']).size()
-print(grouped_by_age_group_and_crash_type)
+# print(grouped_by_age_group_and_crash_type)
+
+
+# Q: Have patterns changed over time
+grouped_by_year = df.groupby('Year').size()
+bus_incidents_per_year = (
+    df[df['Bus Involvement'] == True]
+    .groupby('Year')
+    .size()
+    .reset_index(name='Bus Incidents')
+    .sort_values('Year')
+)
+
+print(grouped_by_year)
+print(bus_incidents_per_year)
