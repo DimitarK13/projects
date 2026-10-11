@@ -101,3 +101,13 @@ grouped_by_gender = df.groupby('Gender').size()
 
 print(grouped_by_gender)
 print(np.around((grouped_by_gender / len(df)) * 100, 2))
+
+
+# Q: How do incidents vary by age group
+grouped_by_age_group = df.groupby('Age Group').size()
+
+print(grouped_by_age_group)
+print(np.around((grouped_by_age_group / len(df)) * 100, 2))
+
+grouped_by_age_group_and_crash_type = df.groupby(['Age Group', 'Crash Type']).size()
+print(grouped_by_age_group_and_crash_type)
