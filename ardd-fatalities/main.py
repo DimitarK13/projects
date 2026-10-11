@@ -74,3 +74,11 @@ df['Christmas Period'] = df['Christmas Period'].replace({'No': False, 'Yes': Tru
 df['Easter Period'] = df['Easter Period'].replace({'No': False, 'Yes': True})
 
 df = df.convert_dtypes()
+
+
+# Analysis
+# Q: How do incidents vary by time of day?
+grouped_by_time_of_day = df.groupby('Time of day').size()
+
+print(grouped_by_time_of_day)
+print(f'{np.around(grouped_by_time_of_day / len(df) * 100, 2)}')
