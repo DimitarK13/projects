@@ -123,5 +123,14 @@ bus_incidents_per_year = (
     .sort_values('Year')
 )
 
-print(grouped_by_year)
-print(bus_incidents_per_year)
+# print(grouped_by_year)
+# print(bus_incidents_per_year)
+
+
+# Q: How patterns vary by road users
+grouped_by_road_users = df.groupby('Road User').size()
+road_users_and_crash_type = df.groupby(['Road User', 'Crash Type']).size()
+
+# print(grouped_by_road_users)
+# print(np.around((grouped_by_road_users / len(df)) * 100, 2))
+# print(road_users_and_crash_type)
