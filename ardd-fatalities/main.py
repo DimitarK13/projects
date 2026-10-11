@@ -89,8 +89,15 @@ grouped_by_state = df.groupby('State').size()
 grouped_by_state_and_time_of_day = df.groupby(['State', 'Time of day']).size()
 grouped_by_state_and_day_of_week = df.groupby(['State', 'Day of week']).size()
 
-print(grouped_by_state)
-print(np.around((grouped_by_state / len(df)) * 100, 2))
+# print(grouped_by_state)
+# print(np.around((grouped_by_state / len(df)) * 100, 2))
 
-print(grouped_by_state_and_time_of_day)
-print(grouped_by_state_and_day_of_week)
+# print(grouped_by_state_and_time_of_day)
+# print(grouped_by_state_and_day_of_week)
+
+
+# Q: How do incidents vary by gender
+grouped_by_gender = df.groupby('Gender').size()
+
+print(grouped_by_gender)
+print(np.around((grouped_by_gender / len(df)) * 100, 2))
