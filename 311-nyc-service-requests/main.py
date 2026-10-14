@@ -56,7 +56,7 @@ grouped_by_problem = df.groupby('Problem').size().sort_values(ascending=False)
 # Q: Which agencies receive the most requests?
 grouped_by_agency = df.groupby('Agency').size().sort_values(ascending=False)
 
-print(grouped_by_agency)
+# print(grouped_by_agency)
 # A:
 # 1. NYPD     794057
 # 2. HPD      274892
@@ -64,14 +64,14 @@ print(grouped_by_agency)
 # 4. DOT      120404
 # 5. DEP      113016
 
-sns.barplot(x=grouped_by_agency.values[:5], y=grouped_by_agency.index[:5], hue=grouped_by_agency[:5])
+# sns.barplot(x=grouped_by_agency.values[:5], y=grouped_by_agency.index[:5], hue=grouped_by_agency[:5])
 
-plt.xlabel('Number of Requests')
-plt.ylabel('Types of Agencies')
-plt.title('Which agencies receive the most requests?')
-plt.legend(title='# of Requests')
-plt.tight_layout()
-plt.show()
+# plt.xlabel('Number of Requests')
+# plt.ylabel('Types of Agencies')
+# plt.title('Which agencies receive the most requests?')
+# plt.legend(title='# of Requests')
+# plt.tight_layout()
+# plt.show()
 
 
 # Q: How do requests vary by month
@@ -112,6 +112,8 @@ grouped_by_location = df.groupby(['City', 'Problem']).size()
 
 top_3_cities = df['City'].value_counts().head(3).index
 
+top_3_crimes_top_3_cities = grouped_by_location[top_3_cities].unstack(fill_value=0)[['Illegal Parking', 'Noise - Residential', 'Noise - Street/Sidewalk']]
+
 # print(grouped_by_location.loc[top_3_cities].sort_values(ascending=False).head(10))
 # 1. BROOKLYN         507795
 # - Illegal Parking            98342
@@ -125,3 +127,8 @@ top_3_cities = df['City'].value_counts().head(3).index
 # - Illegal Parking            29973
 # - Noise - Street/Sidewalk    27561
 # - Noise - Residential        25433
+
+top_3_crimes_top_3_cities.plot(kind='bar', xlabel='City', ylabel='# of Requests', rot=0)
+plt.title('How do patterns differ geographically')
+plt.tight_layout()
+plt.show()
