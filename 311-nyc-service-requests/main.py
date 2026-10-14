@@ -1,4 +1,8 @@
 import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+sns.set_theme()
 
 pd.set_option('display.max_columns', None)
 
@@ -39,6 +43,14 @@ grouped_by_problem = df.groupby('Problem').size().sort_values(ascending=False)
 # 3. Noise - Street/Sidewalk    113564
 # 4. Blocked Driveway            80485
 # 5. UNSANITARY CONDITION        66874
+
+# plot = sns.barplot(x=grouped_by_problem.values[:5], y=grouped_by_problem.index[:5], hue=grouped_by_problem.values[:5])
+
+# plt.xlabel('Number of Requests')
+# plt.xlabel('Type of Problem')
+# plt.title('What types of problems generate the most requests?')
+# plt.tight_layout()
+# plt.show()
 
 
 # Q: Which agencies receive the most requests?
