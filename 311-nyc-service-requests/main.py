@@ -56,13 +56,22 @@ grouped_by_problem = df.groupby('Problem').size().sort_values(ascending=False)
 # Q: Which agencies receive the most requests?
 grouped_by_agency = df.groupby('Agency').size().sort_values(ascending=False)
 
-# print(grouped_by_agency)
+print(grouped_by_agency)
 # A:
 # 1. NYPD     794057
 # 2. HPD      274892
 # 3. DSNY     147244
 # 4. DOT      120404
 # 5. DEP      113016
+
+sns.barplot(x=grouped_by_agency.values[:5], y=grouped_by_agency.index[:5], hue=grouped_by_agency[:5])
+
+plt.xlabel('Number of Requests')
+plt.ylabel('Types of Agencies')
+plt.title('Which agencies receive the most requests?')
+plt.legend(title='# of Requests')
+plt.tight_layout()
+plt.show()
 
 
 # Q: How do requests vary by month
