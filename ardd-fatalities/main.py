@@ -99,24 +99,39 @@ grouped_by_state = df.groupby('State').size()
 grouped_by_state_and_time_of_day = df.groupby(['State', 'Time of day']).size()
 grouped_by_state_and_day_of_week = df.groupby(['State', 'Day of week']).size()
 
-# print(grouped_by_state)
-# print(np.around((grouped_by_state / len(df)) * 100, 2))
+print(grouped_by_state)
+print(np.around((grouped_by_state / len(df)) * 100, 2))
 
-# print(grouped_by_state_and_time_of_day)
-# print(grouped_by_state_and_day_of_week)
+print(grouped_by_state_and_time_of_day)
+print(grouped_by_state_and_day_of_week)
+
+state_time_of_day = grouped_by_state_and_time_of_day.unstack(fill_value=0)
+state_day_of_week = grouped_by_state_and_day_of_week.unstack(fill_value=0)
+
+
+time_of_day = state_time_of_day.plot(kind='bar', color=[c_palette[0], c_palette[4]])
+time_of_day.set_xlabel('States')
+time_of_day.set_ylabel('# of Incidents')
+time_of_day.set_title('Incdidents per state by time of day', fontweight='bold')
+
+day_of_week_plot = state_day_of_week.plot(kind='bar', color=[c_palette[0], c_palette[4]])
+day_of_week_plot.set_xlabel('States')
+day_of_week_plot.set_ylabel('# of Incidents')
+day_of_week_plot.set_title('Incdidents per state by day of week', fontweight='bold')
+plt.show()
 
 
 # Q: How do incidents vary by gender
 grouped_by_gender = df.groupby('Gender').size()
 
-print(grouped_by_gender)
-print(np.around((grouped_by_gender / len(df)) * 100, 2))
+# print(grouped_by_gender)
+# print(np.around((grouped_by_gender / len(df)) * 100, 2))
 
-plt.figure(figsize=(10, 6.5))
-plt.pie(grouped_by_gender, labels=['Female', 'Male', 'Unspecified'], colors=[c_palette[2], c_palette[4], c_palette[0]], autopct='%.2f%%')
-plt.title('Incidents by gender', fontweight='bold')
-plt.legend()
-plt.show()
+# plt.figure(figsize=(10, 6.5))
+# plt.pie(grouped_by_gender, labels=['Female', 'Male', 'Unspecified'], colors=[c_palette[2], c_palette[4], c_palette[0]], autopct='%.2f%%')
+# plt.title('Incidents by gender', fontweight='bold')
+# plt.legend()
+# plt.show()
 
 
 # Q: How do incidents vary by age group
