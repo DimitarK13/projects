@@ -1,7 +1,13 @@
 import pandas as pd
 import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+sns.set_theme(palette='Greens_d')
 
 pd.set_option('display.max_columns', None)
+
+c_palette = sns.color_palette('Greens_d', 6)
 
 df = pd.read_csv('ardd_fatalities.csv', low_memory=False)
 
@@ -80,8 +86,12 @@ df = df.convert_dtypes()
 # Q: How do incidents vary by time of day?
 grouped_by_time_of_day = df.groupby('Time of day').size()
 
-# print(grouped_by_time_of_day)
-# print(f'{np.around(grouped_by_time_of_day / len(df) * 100, 2)}')
+print(grouped_by_time_of_day)
+print(f'{np.around(grouped_by_time_of_day / len(df) * 100, 2)}')
+plt.pie(grouped_by_time_of_day, labels=['Day', 'Night'], colors=[c_palette[0], c_palette[4]], autopct='%.2f%%')
+plt.title('Incidents variation by time of day', fontweight='bold')
+plt.legend(loc='lower left')
+plt.show()
 
 
 # Q: How do patterns differ between states
