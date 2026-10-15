@@ -7,7 +7,7 @@ sns.set_theme(palette='Greens_d')
 
 pd.set_option('display.max_columns', None)
 
-c_palette = sns.color_palette('Greens_d', 6)
+c_palette = sns.color_palette('Greens_d', 7)
 
 df = pd.read_csv('ardd_fatalities.csv', low_memory=False)
 
@@ -154,20 +154,38 @@ bus_incidents_per_year = (
     .sort_values('Year')
 )
 
-print(grouped_by_year)
+# print(grouped_by_year)
 # print(bus_incidents_per_year)
 
-plot = sns.catplot(data=df, kind='count', y='Year', hue='Year', palette='Greens_d', legend=False)
-plot.set_axis_labels('# of Incidents', 'Year')
-plt.gcf().set_size_inches(6, 8)
-plt.title('Number of incidents per year')
-plt.show()
+# plot = sns.catplot(data=df, kind='count', y='Year', hue='Year', palette='Greens_d', legend=False)
+# plot.set_axis_labels('# of Incidents', 'Year')
+# plt.gcf().set_size_inches(6, 8)
+# plt.title('Number of incidents per year')
+# plt.show()
 
 
 # Q: How patterns vary by road users
 grouped_by_road_users = df.groupby('Road User').size()
 road_users_and_crash_type = df.groupby(['Road User', 'Crash Type']).size()
 
-# print(grouped_by_road_users)
-# print(np.around((grouped_by_road_users / len(df)) * 100, 2))
-# print(road_users_and_crash_type)
+print(grouped_by_road_users)
+print(np.around((grouped_by_road_users / len(df)) * 100, 2))
+print(road_users_and_crash_type)
+
+road_users_and_crash_type_unstacked = road_users_and_crash_type.unstack(fill_value=0)
+
+fig, axes = plt.subplots(1, 2, figsize=(16, 10))
+
+axes[0].pie(
+    grouped_by_road_users, 
+    labels=grouped_by_road_users.index,
+    autopct='%.2f%%')
+axes[0].legend(loc='upper right', bbox_to_anchor=(1.3, 1))
+axes[0].set_title('Percent of incidents by Road Users', fontweight='bold')
+
+road_users_and_crash_type_unstacked.plot(kind='barh', ax=axes[1], color=[c_palette[0], c_palette[4]])
+axes[1].set_xlabel('# of Incidents')
+axes[1].set_title('Road Users by Crash Types', fontweight='bold')
+
+plt.tight_layout()
+plt.show()
