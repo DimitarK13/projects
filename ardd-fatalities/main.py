@@ -86,12 +86,12 @@ df = df.convert_dtypes()
 # Q: How do incidents vary by time of day?
 grouped_by_time_of_day = df.groupby('Time of day').size()
 
-print(grouped_by_time_of_day)
-print(f'{np.around(grouped_by_time_of_day / len(df) * 100, 2)}')
-plt.pie(grouped_by_time_of_day, labels=['Day', 'Night'], colors=[c_palette[0], c_palette[4]], autopct='%.2f%%')
-plt.title('Incidents variation by time of day', fontweight='bold')
-plt.legend(loc='lower left')
-plt.show()
+# print(grouped_by_time_of_day)
+# print(f'{np.around(grouped_by_time_of_day / len(df) * 100, 2)}')
+# plt.pie(grouped_by_time_of_day, labels=['Day', 'Night'], colors=[c_palette[0], c_palette[4]], autopct='%.2f%%')
+# plt.title('Incidents variation by time of day', fontweight='bold')
+# plt.legend(loc='lower left')
+# plt.show()
 
 
 # Q: How do patterns differ between states
@@ -109,8 +109,14 @@ grouped_by_state_and_day_of_week = df.groupby(['State', 'Day of week']).size()
 # Q: How do incidents vary by gender
 grouped_by_gender = df.groupby('Gender').size()
 
-# print(grouped_by_gender)
-# print(np.around((grouped_by_gender / len(df)) * 100, 2))
+print(grouped_by_gender)
+print(np.around((grouped_by_gender / len(df)) * 100, 2))
+
+plt.figure(figsize=(10, 6.5))
+plt.pie(grouped_by_gender, labels=['Female', 'Male', 'Unspecified'], colors=[c_palette[2], c_palette[4], c_palette[0]], autopct='%.2f%%')
+plt.title('Incidents by gender', fontweight='bold')
+plt.legend()
+plt.show()
 
 
 # Q: How do incidents vary by age group
